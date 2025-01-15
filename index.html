@@ -1,0 +1,273 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-title" content="Scar">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>Bundle and Rug Sniffer Extension</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0e0f1a, #1a1c2e);
+            background-image: url('images/bg.png');
+            background-blend-mode: overlay;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .content {
+            flex: 1;
+            margin-top: 20px;
+        }
+
+        header {
+            margin: 20px 0;
+            font-size: 36px;
+            font-weight: bold;
+            color: #00ffcc;
+            text-transform: uppercase;
+            /* animation: glitch 1.5s infinite; */
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 2px 2px 0 #ff00ff, -2px -2px 0 #00ffcc; }
+            25% { text-shadow: -2px -2px 0 #ff00ff, 2px 2px 0 #00ffcc; }
+            50% { text-shadow: 0 0 5px #00ffcc, 0 0 10px #ff00ff; }
+            75% { text-shadow: -2px 2px 0 #ff00ff, 2px -2px 0 #00ffcc; }
+            100% { text-shadow: 2px -2px 0 #ff00ff, -2px 2px 0 #00ffcc; }
+        }
+
+        .nav-bar {
+            margin-top: 10px;
+        }
+
+        .nav-bar button {
+            background: #1a1c2e;
+            color: #00ffcc;
+            border: 1px solid #00ffcc;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+
+        .nav-bar button:hover {
+            background: #00ffcc;
+            color: #1a1c2e;
+            box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+        }
+
+        .banner {
+            margin: 20px auto;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #00ffcc;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.6);
+        }
+
+        .banner h1 {
+            font-size: 28px;
+            text-transform: uppercase;
+            color: #00ffcc;
+            /* animation: glitch 1.5s infinite; */
+        }
+
+        .banner video {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            margin: 20px auto;
+            background: #00ffcc;
+            color: #1a1c2e;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 12px 25px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+            transition: all 0.3s;
+        }
+
+        .download-btn:hover {
+            background: #1a1c2e;
+            color: #00ffcc;
+            box-shadow: 0 0 15px #ff00ff, 0 0 30px #ff00ff;
+        }
+
+        .faq {
+            margin: 20px auto;
+            max-width: 800px;
+            text-align: left;
+        }
+
+        .faq h2 {
+            font-size: 24px;
+            color: #00ffcc;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #00ffcc;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+        }
+
+        .faq-item p {
+            display: none;
+            font-size: 16px;
+            margin: 10px 0 0;
+            line-height: 1.5;
+        }
+
+        .faq-item.open p {
+            display: block;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 20px 0;
+            font-size: 14px;
+            color: #aaa;
+            text-shadow: 0 0 10px #00ffcc;
+            /* animation: glitch 1.5s infinite; */
+        }
+
+        .tokenomics {
+            margin: 20px auto;
+            max-width: 800px;
+            text-align: left;
+        }
+
+        .tokenomics h3 {
+            font-size: 24px;
+            color: #00ffcc;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 0 10px;
+            }
+
+            header {
+                font-size: 28px;
+            }
+
+            .nav-bar button {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+
+            .banner h1 {
+                font-size: 22px;
+            }
+
+            .faq h2 {
+                font-size: 20px;
+            }
+
+            .faq-item p {
+                font-size: 14px;
+            }
+
+            .tokenomics h3 {
+                font-size: 20px;
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const faqItems = document.querySelectorAll(".faq-item");
+            faqItems.forEach(item => {
+                item.addEventListener("click", () => {
+                    item.classList.toggle("open");
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="content">
+        <header>POWERED BY Scar AI</header>
+        <div class="nav-bar">
+            <a href="https://pump.fun/coin/123456789" target="_blank">
+                <button>Pump</button>
+            </a>
+            <a href="https://x.com/ScarToolAI_" target="_blank">
+                <button>X</button>
+            </a>
+            <a href="https://t.me/ScarToolSolana" target="_blank">
+                <button>Telegram - Coming Soon</button>
+            </a>
+        </div>
+        <div class="banner">
+            <h1>BUNDLE AND RUG SNIFFER EXTENSION</h1>
+            <video autoplay="" loop="" muted="" controls="" playsinline="">
+                <source src="media/luma.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <a href="" target="_blank" class="download-btn">Download from Chrome Store - Coming In 24 Hours</a>
+        </div>
+        <div class="faq">
+            <h2>FAQ</h2>
+            <div class="faq-item">
+                <strong>What is Scar AI?</strong>
+                <p>Scar AI is a built-in Chrome extension that's compatible with DexScreener, Photon, and BullX (more coming soon). It shows users key bundle metrics about a token as well as the token creator's data.</p>
+            </div>
+            <div class="faq-item">
+                <strong>What’s the cost?</strong>
+                <p>The extension is completely free for all users. We aim to provide transparent and accessible tools for all traders. In future we look to provide a premium feature for our token holders.</p>
+            </div>
+            <div class="faq-item">
+                <strong>How to install the extension?</strong>
+                <p>You can download the extension from the Chrome Web Store or directly from our official website. Installation takes only a few clicks!</p>
+            </div>
+        </div>
+        <div class="tokenomics">
+            <h3>CA: 123456789</h3>
+        </div>
+    </div>
+    <footer>
+        <p>3% of the supply will be locked for future implementations and upgrades.</p>
+        © 2025 Scar AI. All Rights Reserved.
+    </footer>
+
+
+</body></html>
